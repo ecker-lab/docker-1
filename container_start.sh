@@ -12,7 +12,7 @@
 
 # docker run -it --rm -p 8888:8888 --user root -e NB_UID=617278 -e NB_USER=burg -e NB_GID=47162 -e NB_GROUP=ECKERLAB -w /home/burg -e CHOWN_HOME=yes -v /usr/users/burg:/home/burg/work jupyter/scipy-notebook:feacdbfc2e89
 # docker run -it --rm -p 8888:8888 --user root -e NB_UID=617278 -e NB_USER=burg -e NB_GID=47162 -e NB_GROUP=ECKERLAB -w /home/burg -e JUPYTER_ENABLE_LAB=yes -e GRANT_SUDO=yes -e CHOWN_HOME=yes -v /usr/users/burg:/home/burg/work jupyter/scipy-notebook:feacdbfc2e89
-docker run -it --rm -p 8888:8888 --user root -e NB_UID=617278 -e NB_USER=burg -e NB_GID=47162 -e NB_GROUP=ECKERLAB -w /home/burg -e JUPYTER_ENABLE_LAB=yes -e GRANT_SUDO=yes -e CHOWN_HOME=yes -v /usr/users/burg:/home/burg/work jupyter/scipy-notebook:feacdbfc2e89
+docker run -it --rm --gpus all -p 8888:8888 --user root -e NB_UID=617278 -e NB_USER=burg -e NB_GID=47162 -e NB_GROUP=ECKERLAB -w /home/burg/ -e JUPYTER_ENABLE_LAB=yes -e GRANT_SUDO=yes -e CHOWN_HOME=yes -e JUPYTER_TOKEN=dcb69506928946ffe4a60880e56aa6d79b6cd9ea9aaee168 -v /usr/users/burg:/home/burg/work max-test
 
 
 
