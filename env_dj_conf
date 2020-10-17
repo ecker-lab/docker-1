@@ -1,0 +1,9 @@
+# datajoint config
+DJ_HOST=
+DJ_USER=
+DJ_PASS=
+
+# datajoint data access config
+MINIO_ENDPOINT=
+MINIO_ACCESS_KEY=
+MINIO_SECRET_KEY=
