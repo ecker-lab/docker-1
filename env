@@ -1,0 +1,13 @@
+# optionally set predefined jupyter token by uncommenting and adjusting the
+# token value
+# JUPYTER_TOKEN=dcb69506928946ffe4a60880e56aa6d79b6cd9ea9aaee168
+
+# datajoint config
+DJ_HOST=
+DJ_USER=
+DJ_PASS=
+
+# datajoint data access config
+MINIO_ENDPOINT=
+MINIO_ACCESS_KEY=
+MINIO_SECRET_KEY=
