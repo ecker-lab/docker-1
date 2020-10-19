@@ -89,6 +89,7 @@ RUN conda install \
         webargs>=6.0.0 \
         xonsh \
         gitpython \
+        scikit-image \
  && conda clean -tipsy \
  && fix-permissions $CONDA_DIR \
  && fix-permissions /home/$NB_USER
