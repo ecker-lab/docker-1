@@ -28,6 +28,12 @@ dockerexec container-id /bin/bash
 
 
 
+# Contributing
+
+Contributions are very welcome by opening a pull request.
+
+
+
 # Acknowledgements
 
 Matthias Kümmerer (https://github.com/matthias-k) for helpful discussions.
