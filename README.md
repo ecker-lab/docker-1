@@ -30,7 +30,7 @@ dockerexec container-id /bin/bash
 
 # Contributing
 
-Contributions are very welcome by opening a pull request.
+Please contribute by opening a pull request.
 
 
 
