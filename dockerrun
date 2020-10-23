@@ -3,8 +3,13 @@
 # uncommend if you encounter errors due to agecker being unmounted
 # ls /usr/users/agecker # > /dev/null
 
+# Set primary group name
+GROUPNAME=ECKERLAB
+# Get according group id
+GROUPID=$(cut -d: -f3 < <(getent group $GROUPNAME))
+
 docker run --rm -d --gpus all -p 8888:8888 --user root -e USER=`whoami` \
--e NB_UID=`id -u` -e NB_USER=`whoami` -e NB_GID=47162 -e NB_GROUP=ECKERLAB \
+-e NB_UID=`id -u` -e NB_USER=`whoami` -e NB_GID=$GROUPID -e NB_GROUP=$GROUPNAME \
 -w /home/`whoami`/ -e JUPYTER_ENABLE_LAB=yes -e GRANT_SUDO=yes -e CHOWN_HOME=yes \
 -v /usr/users/`whoami`:/home/`whoami`/netwhome \
 -v /usr/users/agecker:/home/`whoami`/agecker $@
