@@ -80,7 +80,6 @@ RUN apt-get update -qq \
   vim \
   zlib1g \
   zlib1g-dev \
-  htop \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -97,6 +96,7 @@ RUN conda install \
         dill \
         emcee \
         executor \
+        fastprogress \
         flask \
         glom \
 	gunicorn \
@@ -118,6 +118,7 @@ RUN conda install \
         requests \
         schema \
         seaborn \
+        scikit-learn \
         tqdm \
         wand \
         webargs>=6.0.0 \
