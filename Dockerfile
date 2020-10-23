@@ -64,17 +64,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends     libcudnn8=$
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get install -yq -qq --no-install-recommends \
-  g++ \
   git \
   htop \
-  imagemagick \
-  less \
-  libgmp-dev \
-  liboctave-dev \
   make \
   octave \
-  octave-image \
-  octave-statistics \
   python3-dev \
   unzip \
   vim \
@@ -88,41 +81,16 @@ RUN apt-get update -qq \
 
 RUN conda install \
         # jupyter_nbextensions_configurator \
-        boltons>=20.1.0\
-        bs4 \ 
-        click \
-        corner \
-        cython \
-        dill \
-        emcee \
-        executor \
         fastprogress \
-        flask \
-        glom \
-	gunicorn \
         h5py \
-        hypothesis \
-        imageio \
         ipyparallel \
         ipywidgets \
         jsonschema \
-        line_profiler \
-        natsort \
-        numba \
         pandas \
-        pdvega \
         pillow \
-        pixiedust \
-        psutil \
-        pytest \
-        requests \
-        schema \
         seaborn \
         scikit-learn \
         tqdm \
-        wand \
-        webargs>=6.0.0 \
-        xonsh \
         gitpython \
         scikit-image \
  && conda clean -tipsy \
