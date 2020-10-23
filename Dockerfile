@@ -67,7 +67,6 @@ RUN apt-get update -qq \
   git \
   htop \
   make \
-  octave \
   python3-dev \
   unzip \
   vim \
