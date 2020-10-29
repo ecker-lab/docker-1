@@ -1,8 +1,7 @@
 # Usage
 
-The most recent version of this image is available at Docker hub automatically
-(by automated builds from this repo). Thus, you do not have to build the image
-locally anymore.
+The most recent version of this image is available at Docker hub by automated 
+builds from the main branch of this repo.
 
 Start a CPU container exposing Jupyter lab to port 9999 on the host machine:
 ```bash
@@ -29,7 +28,7 @@ dockerexec container-id /bin/bash
 
 ## Build and use image locally
 
-Build the Docker image locally:
+In case you want to build the Docker image locally:
 ```bash
 docker build . -t your-image-tag
 ```
