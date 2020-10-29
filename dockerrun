@@ -11,13 +11,13 @@ GROUPID=$(cut -d: -f3 < <(getent group $GROUPNAME))
 # if GPU environment variable not set
 if [ -z "$GPU" ]
 then  # start cpu container
-    docker run --rm -d --user root -e USER=`whoami` \
+    docker run --rm -d --shm-size 128G --user root -e USER=`whoami` \
 -e NB_UID=`id -u` -e NB_USER=`whoami` -e NB_GID=$GROUPID -e NB_GROUP=$GROUPNAME \
 -w /home/`whoami`/ -e JUPYTER_ENABLE_LAB=yes -e GRANT_SUDO=yes -e CHOWN_HOME=yes \
 -v /usr/users/`whoami`:/home/`whoami`/netwhome \
 -v /usr/users/agecker:/home/`whoami`/agecker $@
 else  # start gpu container
-    docker run --rm -d --user root -e USER=`whoami` --gpus $GPU -e GPU=$GPU \
+    docker run --rm -d --shm-size 128G --user root -e USER=`whoami` --gpus $GPU -e GPU=$GPU \
 -e NB_UID=`id -u` -e NB_USER=`whoami` -e NB_GID=$GROUPID -e NB_GROUP=$GROUPNAME \
 -w /home/`whoami`/ -e JUPYTER_ENABLE_LAB=yes -e GRANT_SUDO=yes -e CHOWN_HOME=yes \
 -v /usr/users/`whoami`:/home/`whoami`/netwhome \
