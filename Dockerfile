@@ -113,3 +113,4 @@ RUN rm /usr/bin/python3 && ln -s /opt/conda/bin/python
 
 # switch back to default user (jovyan)
 USER $NB_USER
+
