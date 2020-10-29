@@ -14,6 +14,11 @@ Start a container on GPU 0 exposing Jupyter lab to port 9999 on the host machine
 GPU=0 dockerrun --env-file path_to_env_file maxfburg/base:latest
 ```
 
+Start container as above and run python script right after startup:
+```bash
+GPU=0 dockerrun --env-file path_to_env_file maxfburg/base:latest start.sh python3 my-script.py
+```
+
 Show list of running containers and assigned GPU:
 ```bash
 dockerps
