@@ -99,7 +99,7 @@ RUN conda install \
  && fix-permissions $CONDA_DIR \
  && fix-permissions /home/$NB_USER
 
-RUN pip install --no-cache-dir tensorflow-gpu==1.13 \
+RUN pip install --no-cache-dir tensorflow-gpu==1.15 \
  && fix-permissions $CONDA_DIR \
  && fix-permissions /home/$NB_USER
 
