@@ -11,7 +11,7 @@ Passing an environment file is optional. Possible to pass more arguments.
 
 Start a container on GPU 0 exposing Jupyter lab to port 9999 on the host machine:
 ```bash
-GPU=0 dockerrun --env-file path_to_env_file maxfburg/base:latest
+GPU=0 dockerrun --env-file path_to_env_file -p 9999:8888 maxfburg/base:latest
 ```
 
 Start container as above and run python script right after startup:
