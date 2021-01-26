@@ -1,4 +1,4 @@
-ARG BASE_CONTAINER=TODO
+ARG BASE_CONTAINER=eckerlab/docker-stacks:initial_image
 FROM $BASE_CONTAINER
 
 LABEL maintainer="Max Burg <max.burg@bethgelab.org>"
