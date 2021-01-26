@@ -3,25 +3,36 @@
 # uncommend if you encounter errors due to agecker being unmounted
 # ls /usr/users/agecker # > /dev/null
 
+# All groups available
+GROUP2=($(groups))
 # Set primary group name
 GROUPNAME=ECKERLAB
+if echo $(groups) | grep -q -w "ECKERLAB"; then
+        GROUPNAME=ECKERLAB
+else
+        GROUPNAME=${GROUP2[0]}
+fi
 # Get according group id
 GROUPID=$(cut -d: -f3 < <(getent group $GROUPNAME))
+# Get random port for Jupyter notebook
+RANDPORT=$(shuf -i 600-800 -n 1)
 
 # if GPU environment variable not set
 if [ -z "$GPU" ]
 then  # start cpu container
     docker run --rm -d --shm-size 128G --user root -e USER=`whoami` \
 -e NB_UID=`id -u` -e NB_USER=`whoami` -e NB_GID=$GROUPID -e NB_GROUP=$GROUPNAME \
+--name `whoami`-cpu -p $RANDPORT:8888 \
 -w /home/`whoami`/ -e JUPYTER_ENABLE_LAB=yes -e GRANT_SUDO=yes -e CHOWN_HOME=yes \
--v /usr/users/`whoami`:/home/`whoami`/netwhome \
--v /usr/users/agecker:/home/`whoami`/agecker $@
+-v /usr/users/`whoami`:/home/`whoami`/usr/users/`whoami` \
+-v /usr/users/agecker:/home/`whoami`/data $@
 else  # start gpu container
     docker run --rm -d --shm-size 128G --user root -e USER=`whoami` --gpus $GPU -e GPU=$GPU \
 -e NB_UID=`id -u` -e NB_USER=`whoami` -e NB_GID=$GROUPID -e NB_GROUP=$GROUPNAME \
+--name `whoami`-gpu -p $RANDPORT:8888 \
 -w /home/`whoami`/ -e JUPYTER_ENABLE_LAB=yes -e GRANT_SUDO=yes -e CHOWN_HOME=yes \
--v /usr/users/`whoami`:/home/`whoami`/netwhome \
--v /usr/users/agecker:/home/`whoami`/agecker $@
+-v /usr/users/`whoami`:/home/`whoami`/usr/users/`whoami` \
+-v /usr/users/agecker:/home/`whoami`/data $@
 fi
-
+echo "port=$RANDPORT"
 
