@@ -23,16 +23,14 @@ then  # start cpu container
     docker run --rm -d --shm-size 128G --user root -e USER=`whoami` \
 -e NB_UID=`id -u` -e NB_USER=`whoami` -e NB_GID=$GROUPID -e NB_GROUP=$GROUPNAME \
 --name `whoami`-cpu -p $RANDPORT:8888 \
--w /home/`whoami`/ -e JUPYTER_ENABLE_LAB=yes -e GRANT_SUDO=yes -e CHOWN_HOME=yes \
--v /usr/users/`whoami`:/home/`whoami`/usr/users/`whoami` \
--v /usr/users/agecker:/home/`whoami`/data $@
+-w /usr/users/ -e JUPYTER_ENABLE_LAB=yes -e GRANT_SUDO=yes -e CHOWN_HOME=yes \
+-v /usr/users/:/usr/users/ $@
 else  # start gpu container
     docker run --rm -d --shm-size 128G --user root -e USER=`whoami` --gpus $GPU -e GPU=$GPU \
 -e NB_UID=`id -u` -e NB_USER=`whoami` -e NB_GID=$GROUPID -e NB_GROUP=$GROUPNAME \
 --name `whoami`-gpu -p $RANDPORT:8888 \
--w /home/`whoami`/ -e JUPYTER_ENABLE_LAB=yes -e GRANT_SUDO=yes -e CHOWN_HOME=yes \
--v /usr/users/`whoami`:/home/`whoami`/usr/users/`whoami` \
--v /usr/users/agecker:/home/`whoami`/data $@
+-w /usr/users/ -e JUPYTER_ENABLE_LAB=yes -e GRANT_SUDO=yes -e CHOWN_HOME=yes \
+-v /usr/users/:/usr/users/ $@
 fi
 echo "port=$RANDPORT"
 
