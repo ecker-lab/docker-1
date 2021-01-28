@@ -1,5 +1,6 @@
 #!/usr/bin/env python2
 import os
+import grp
 import argparse
 import random
 from subprocess import call, check_output
@@ -54,15 +55,7 @@ parser.add_argument('-u', '--user', metavar='USER_NAME', type=str,
 
 parser.add_argument('--uid', metavar='USER_ID', type=int,
                     default=os.getuid(),
-					help='Specify an alternative user ID (default: $UID)')
-                    
-parser.add_argument('--gid', metavar='GROUP_ID', type=int,
-                    default=47162, #os.getuid(),
-					help='Specify an alternative group ID (default: $GID)')
-                    
-parser.add_argument('--gname', metavar='GROUP_NAME', type=str,
-                    default='ECKERLAB', #os.getuid(),
-					help='Specify an alternative group ID (default: ECKERLAB)')
+					help='Specify an alternative user ID (default: $UID)') 
 
 parser.add_argument('--jupyterport', metavar='JUPYTER_PORT', type=int,
                     default=random.randint(600,800),
@@ -73,6 +66,17 @@ parser.add_argument('--name', metavar='CONTAINER_NAME', type=str,
 					help='Name of container (default: $USER-[CPU/$GPU])')
 
 (args, extras) = parser.parse_known_args()
+
+
+# Set user group
+# All user groups available
+user_groups=[grp.getgrgid(g).gr_name for g in os.getgroups()]
+# Set primary group name
+group_name='ECKERLAB'
+group_id=47162
+if group_name not in user_groups:
+    group_id = os.getegid()
+    group_name = grp.getgrgid(group_id).gr_name
 
 
 # container name
@@ -93,8 +97,8 @@ command += [
 		   '-e', 'USER=' + args.user,                  # set user-name
 		   '-e', 'NB_UID=' + str(args.uid),
 		   '-e', 'NB_USER=' + args.user,
-		   '-e', 'NB_GID=' + str(args.gid),
-		   '-e', 'NB_GROUP=' + args.gname,
+		   '-e', 'NB_GID=' + str(group_id),
+		   '-e', 'NB_GROUP=' + group_name,
 		   '-e', 'GPU=' + GPU,                         # set GPU
 		   '-w', '/usr/users/',                         
 		   '-e', 'JUPYTER_ENABLE_LAB=yes',
