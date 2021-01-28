@@ -80,7 +80,7 @@ if group_name not in user_groups:
 
 
 # container name
-gpu_name = GPU.translate(None, ',') if GPU != "cpu" else 'CPU'
+gpu_name = '-gpu' + GPU.translate(None, ',') if GPU != "cpu" else '-cpu'
 container_name = os.environ['USER'] + gpu_name
 if args.name != "":
     container_name = container_name + "-" + args.name
@@ -114,13 +114,12 @@ command += [
 
 
 # print directions
-print("Setting Notebook port binding to: {0} (to set manually add --jupyterport {0} as flag)".format(args.jupyterport))
+print("Setting Notebook port binding to: {} (to set manually add --jupyterport <port> as flag)".format(args.jupyterport))
 print("")
 print("You can now open the notebook on the host machine by directing your browser to")
 print("")
 print("    http://localhost:%i" % args.jupyterport)
 print("")
-print(command)
 
 check_other_containers(GPU)
 call(command)
