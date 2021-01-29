@@ -104,7 +104,8 @@ command += [
 		   '-e', 'JUPYTER_ENABLE_LAB=yes',
 		   '-e', 'GRANT_SUDO=yes',
 		   '-e', 'CHOWN_HOME=yes',
-		   '-v', '/usr/users:/usr/users',              # mount users directory
+		   '-v', '/usr/users/'+args.user+':/usr/users/'+args.user,              # mount users directory
+                   '-v', '/usr/users/agecker:/usr/users/agecker',
 		   '--name', container_name,                   # set container name
 		   '--shm-size', '128G',                       # set size of /dev/shm
 		   '--user', 'root',                           # set user
