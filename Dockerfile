@@ -1,4 +1,4 @@
-ARG BASE_CONTAINER=eckerlab/docker-stacks:initial_image
+ARG BASE_CONTAINER=eckerlabdocker/docker-stacks:cuda11.0-cudnn8
 FROM $BASE_CONTAINER
 
 LABEL maintainer="Max Burg <max.burg@bethgelab.org>"
