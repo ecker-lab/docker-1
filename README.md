@@ -4,9 +4,9 @@ Versions of this image for various combinations of CUDA, Python, PyTorch, Tensor
 
 Start a CPU container exposing Jupyter lab to port 9999 on the host machine:
 ```bash
-dockerrun --env-file path_to_env_file eckerlabdocker/docker:cuda11.0-py3.8-torch1.7-tf2.4
+dockerrun --env-file path_to_env_file IMAGENAME
 ```
-Passing an environment file is optional. Dockerrun sets a random Jupyter Lab portforwarding automatically. You can overwrite this behaviour by passing `--jupyterport PORTNUMBER`. Additionally, you can pass any arguments that would work with standard `docker run`.
+where `IMAGENAME` has to be replaced by the image you want to use, e.g. `eckerlabdocker/docker:cuda11.0-py3.8-torch1.7-tf2.4`. Passing an environment file is optional. Dockerrun sets a random Jupyter Lab portforwarding automatically. You can overwrite this behaviour by passing `--jupyterport PORTNUMBER`. Additionally, you can pass any arguments that would work with standard `docker run`.
 
 Start a container from image `IMAGENAME` on GPU 0 exposing Jupyter lab to port 9999 on the host machine:
 ```bash
@@ -15,7 +15,7 @@ GPU=0 dockerrun --env-file path_to_env_file --jupyterport 9999 IMAGENAME
 
 Start container as above and run python script right after startup:
 ```bash
-GPU=0 dockerrun --env-file path_to_env_file eckerlabdocker/docker:cuda11.0-py3.8-torch1.7-tf2.4 start.sh python3 my-script.py
+GPU=0 dockerrun --env-file path_to_env_file IMAGENAME start.sh python3 my-script.py
 ```
 
 Show list of running containers and assigned GPU:
@@ -32,7 +32,7 @@ To run the image with SLURM and Singularity on the HPC cluster, execute:
 ```bash
 srun --pty -p gpu --gres=gpu:v100:1 -t 2-00:00:00 singularity shell --nv --bind /local:/local docker://eckerlabdocker/docker:cuda11.0-py3.8-torch1.7-tf2.4
 ```
-This will automatically download the Docker image from Docker Hub and convert it to a Singularity image.
+This will automatically download the Docker image from Docker Hub and convert it to a Singularity image. (For this step to work it is required that the Docker image you want to use is available on Docker Hub).
 
 
 
