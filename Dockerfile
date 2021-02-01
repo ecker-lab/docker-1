@@ -1,4 +1,4 @@
-ARG BASE_CONTAINER=eckerlabdocker/docker-stacks:cuda11.0-cudnn8
+ARG BASE_CONTAINER=eckerlabdocker/docker-stacks:cuda10.0-cudnn7-python3.7
 FROM $BASE_CONTAINER
 
 LABEL maintainer="Max Burg <max.burg@bethgelab.org>"
@@ -29,26 +29,26 @@ RUN apt-get update -qq \
 RUN conda install \
         # jupyter_nbextensions_configurator \
         fastprogress \
+	gitpython \
         h5py \
         ipyparallel \
         ipywidgets \
         jsonschema \
+	numpy \
         pandas \
         pillow \
         seaborn \
         scikit-learn \
-        tqdm \
-        gitpython \
         scikit-image \
+	scipy \
+	tensorboard \
+	tqdm \
+	pytorch==1.2.0 torchvision==0.4.0 cudatoolkit=10.0 -c pytorch \
  && conda clean -tipsy \
  && fix-permissions $CONDA_DIR \
  && fix-permissions /home/$NB_USER
 
 RUN pip install --no-cache-dir tensorflow-gpu \
- && fix-permissions $CONDA_DIR \
- && fix-permissions /home/$NB_USER
-
-RUN pip install --no-cache-dir torch==1.6.0+cu101 torchvision==0.7.0+cu101 -f https://download.pytorch.org/whl/torch_stable.html \
  && fix-permissions $CONDA_DIR \
  && fix-permissions /home/$NB_USER
 
