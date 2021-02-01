@@ -43,12 +43,16 @@ RUN conda install \
 	scipy \
 	tensorboard \
 	tqdm \
-	pytorch==1.7.0 torchvision==0.8.1 cudatoolkit=11.0 -c pytorch \
  && conda clean -tipsy \
  && fix-permissions $CONDA_DIR \
  && fix-permissions /home/$NB_USER
 
 RUN pip install --no-cache-dir tensorflow-gpu \
+ && fix-permissions $CONDA_DIR \
+ && fix-permissions /home/$NB_USER
+
+
+RUN pip install --no-cache-dir torch==1.7.1+cu110 torchvision==0.8.2+cu110 -f https://download.pytorch.org/whl/torch_stable.html \
  && fix-permissions $CONDA_DIR \
  && fix-permissions /home/$NB_USER
 
