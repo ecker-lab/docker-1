@@ -1,4 +1,4 @@
-ARG BASE_CONTAINER=eckerlabdocker/docker-stacks:cuda10.0-cudnn7-python3.7
+ARG BASE_CONTAINER=eckerlabdocker/docker-stacks:cuda10.2-cudnn8-python3.8
 FROM $BASE_CONTAINER
 
 LABEL maintainer="Max Burg <max.burg@bethgelab.org>"
@@ -43,7 +43,7 @@ RUN conda install \
 	scipy \
 	tensorboard \
 	tqdm \
-	pytorch==1.2.0 torchvision==0.4.0 cudatoolkit=10.0 -c pytorch \
+	pytorch==1.7.0 torchvision==0.8.1 cudatoolkit=10.2 -c pytorch \
  && conda clean -tipsy \
  && fix-permissions $CONDA_DIR \
  && fix-permissions /home/$NB_USER
