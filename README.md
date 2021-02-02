@@ -28,12 +28,6 @@ Get an interactive shell in the container:
 dockerexec container-id /bin/bash
 ```
 
-To run the image with SLURM and Singularity on the HPC cluster, execute:
-```bash
-srun --pty -p gpu --gres=gpu:v100:1 -t 2-00:00:00 singularity shell --nv --bind /local:/local docker://eckerlabdocker/docker:cuda11.0-py3.8-torch1.7-tf2.4
-```
-This will automatically download the Docker image from Docker Hub and convert it to a Singularity image. (For this step to work it is required that the Docker image you want to use is available on Docker Hub).
-
 
 
 ## Build and use image locally
