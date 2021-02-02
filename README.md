@@ -12,6 +12,7 @@ Start a container from image `IMAGENAME` on GPU 0 exposing Jupyter lab to port 9
 ```bash
 GPU=0 dockerrun --env-file path_to_env_file --jupyterport 9999 IMAGENAME
 ```
+To start a container using multiple GPUs, pass the GPU numbers comma separated, e.g. `GPU=0,1,2`.
 
 Start container as above and run python script right after startup:
 ```bash
