@@ -68,7 +68,7 @@ parser.add_argument('--name', metavar='CONTAINER_NAME', type=str,
 (args, extras) = parser.parse_known_args()
 
 
-# Set user group
+# Set user group and directories
 # All user groups available
 user_groups=[grp.getgrgid(g).gr_name for g in os.getgroups()]
 # Set primary group name
@@ -127,8 +127,6 @@ print("You can now open the notebook on the host machine by directing your brows
 print("")
 print("    http://localhost:%i" % args.jupyterport)
 print("")
-
-print(command)
 
 check_other_containers(GPU)
 call(command)
