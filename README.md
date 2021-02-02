@@ -2,7 +2,7 @@
 
 Versions of this image for various combinations of CUDA, Python, PyTorch, Tensorflow, and Jupyter Lab are available at Docker Hub (https://hub.docker.com/repository/docker/eckerlabdocker/docker).
 
-Start a CPU container exposing Jupyter lab to port 9999 on the host machine:
+Start a CPU container exposing Jupyter lab to a random port on the host machine:
 ```bash
 dockerrun --env-file path_to_env_file IMAGENAME
 ```
