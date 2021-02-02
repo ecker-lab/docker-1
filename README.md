@@ -4,19 +4,19 @@ Versions of this image for various combinations of CUDA, Python, PyTorch, Tensor
 
 Start a CPU container exposing Jupyter lab to a random port on the host machine:
 ```bash
-dockerrun --env-file path_to_env_file IMAGENAME
+dockerrun --env-file <path_to_env_file> <image_name>
 ```
-where `IMAGENAME` has to be replaced by the image you want to use, e.g. `eckerlabdocker/docker:cuda11.0-py3.8-torch1.7-tf2.4`. Passing an environment file is optional. Dockerrun sets a random Jupyter Lab portforwarding automatically. You can overwrite this behaviour by passing `--jupyterport PORTNUMBER`. Additionally, you can pass any arguments that would work with standard `docker run`.
+where `<image_name>` has to be replaced by the image you want to use, e.g. `eckerlabdocker/docker:cuda11.0-py3.8-torch1.7-tf2.4`. Passing an environment file is optional. Dockerrun sets a random Jupyter Lab portforwarding automatically. You can overwrite this behaviour by passing `--jupyterport PORTNUMBER`. Additionally, you can pass any argument that would work with standard `docker run`.
 
-Start a container from image `IMAGENAME` on GPU 0 exposing Jupyter lab to port 9999 on the host machine:
+Start a container from image `<image_name>` on GPU 0 exposing Jupyter lab to port 9999 on the host machine:
 ```bash
-GPU=0 dockerrun --env-file path_to_env_file --jupyterport 9999 IMAGENAME
+GPU=0 dockerrun --env-file <path_to_env_file> --jupyterport 9999 <image_name>
 ```
 To start a container using multiple GPUs, pass the GPU numbers comma separated, e.g. `GPU=0,1,2`.
 
 Start container as above and run python script right after startup:
 ```bash
-GPU=0 dockerrun --env-file path_to_env_file IMAGENAME start.sh python3 my-script.py
+GPU=0 dockerrun --env-file <path_to_env_file> <image_name> start.sh python3 my-script.py
 ```
 
 Show list of running containers and assigned GPU:
@@ -26,7 +26,7 @@ dockerps
 
 Get an interactive shell in the container:
 ```bash
-dockerexec container-id /bin/bash
+dockerexec <container_id> /bin/bash
 ```
 
 
@@ -35,7 +35,7 @@ dockerexec container-id /bin/bash
 
 In case you want to build the Docker image locally:
 ```bash
-docker build . -t your-image-tag
+docker build -t <your_image_tag> <path_to_dockerfile>
 ```
 You can use your local image as outlined above.
 
