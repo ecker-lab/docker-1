@@ -61,7 +61,7 @@ parser.add_argument('--jupyterport', metavar='JUPYTER_PORT', type=int,
                     default=random.randint(600,800),
 					help='Specify a jupyter port (default: randomly chosen in port range [600, 800])')
 parser.add_argument('--sshport', metavar='SSH_PORT', type=int,
-					help='Specify an SSH port (default: randomly chosen in port range)')
+					help='Specify an SSH port (default: no ssh port)')
 
 parser.add_argument('--name', metavar='CONTAINER_NAME', type=str,
                     default="",
