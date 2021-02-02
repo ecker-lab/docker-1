@@ -77,6 +77,12 @@ group_id=47162
 if group_name not in user_groups:
     group_id = os.getegid()
     group_name = grp.getgrgid(group_id).gr_name
+    home_dir = '/home/' + args.user
+    bind_dir = ['-v', '/srv/pcpool/' + home_dir + ':' + home_dir]
+else:
+    home_dir = '/usr/users/'
+    bind_dir = ['-v', home_dir + args.user + ':' + home_dir + args.user,
+                '-v', home_dir + 'agecker:' + home_dir + 'agecker']
 
 
 # container name
@@ -88,10 +94,13 @@ if os.environ.get('CONTAINER_POSTFIX'):
     container_name = container_name + "-" + os.environ['CONTAINER_POSTFIX']
 
 # put together the nvidia-docker command
-command = ['nvidia-docker', 'run']
+command = ['nvidia-docker', 'run', '-d']
 
 if args.jupyterport:
     command.extend(['-p', str(args.jupyterport) + ':8888'])  # set JUPYTER port
+
+# mount directories
+command.extend(bind_dir)
 
 command += [
 		   '-e', 'USER=' + args.user,                  # set user-name
@@ -100,17 +109,14 @@ command += [
 		   '-e', 'NB_GID=' + str(group_id),
 		   '-e', 'NB_GROUP=' + group_name,
 		   '-e', 'GPU=' + GPU,                         # set GPU
-		   '-w', '/usr/users/',                         
+		   '-w', home_dir,                         
 		   '-e', 'JUPYTER_ENABLE_LAB=yes',
 		   '-e', 'GRANT_SUDO=yes',
 		   '-e', 'CHOWN_HOME=yes',
-		   '-v', '/usr/users/'+args.user+':/usr/users/'+args.user,              # mount users directory
-                   '-v', '/usr/users/agecker:/usr/users/agecker',
 		   '--name', container_name,                   # set container name
 		   '--shm-size', '128G',                       # set size of /dev/shm
 		   '--user', 'root',                           # set user
 		   '--rm',
-		   '-d'
 		   ] + extras
 
 
@@ -121,6 +127,8 @@ print("You can now open the notebook on the host machine by directing your brows
 print("")
 print("    http://localhost:%i" % args.jupyterport)
 print("")
+
+print(command)
 
 check_other_containers(GPU)
 call(command)
