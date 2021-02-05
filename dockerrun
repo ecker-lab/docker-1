@@ -115,6 +115,7 @@ command += [
 		   '-e', 'GPU=' + GPU,                         # set GPU
 		   '-w', home_dir,                         
 		   '-e', 'JUPYTER_ENABLE_LAB=yes',
+                   '-e', 'JUPYTER_TOKEN=token',
 		   '-e', 'GRANT_SUDO=yes',
 		   '-e', 'CHOWN_HOME=yes',
 		   '--name', container_name,                   # set container name
