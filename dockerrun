@@ -73,9 +73,11 @@ parser.add_argument('--name', metavar='CONTAINER_NAME', type=str,
 # Set user group and directories
 # All user groups available
 user_groups=[grp.getgrgid(g).gr_name for g in os.getgroups()]
+
 # Set primary group name
 group_name='ECKERLAB'
 group_id=47162
+
 if group_name not in user_groups:
     group_id = os.getegid()
     group_name = grp.getgrgid(group_id).gr_name
@@ -100,9 +102,9 @@ command = ['nvidia-docker', 'run', '-d']
 
 if args.sshport:
     command.extend(['-p', str(args.sshport) + ':22'])  # set SSH port
+
 if args.jupyterport:
     command.extend(['-p', str(args.jupyterport) + ':8888'])  # set JUPYTER port
-
 
 if '--env-file' not in extras:
     print('Setting standard value JUPYTER_TOKEN = please_set_individual_token')
@@ -119,7 +121,7 @@ command += [
 		   '-e', 'NB_GID=' + str(group_id),
 		   '-e', 'NB_GROUP=' + group_name,
 		   '-e', 'GPU=' + GPU,                         # set GPU
-		   '-w', home_dir,                         
+		   '-w', os.getcwd(),                         
 		   '-e', 'JUPYTER_ENABLE_LAB=yes',
 		   '-e', 'GRANT_SUDO=yes',
 		   '-e', 'CHOWN_HOME=yes',
