@@ -107,8 +107,8 @@ if args.jupyterport:
     command.extend(['-p', str(args.jupyterport) + ':8888'])  # set JUPYTER port
 
 if '--env-file' not in extras:
-    print('Setting standard value JUPYTER_TOKEN = please_set_individual_token')
-    command += ['-e', 'JUPYTER_TOKEN=please_set_individual_token']
+    print('Setting standard value JUPYTER_TOKEN =token')
+    command += ['-e', 'JUPYTER_TOKEN=token']
 
 
 # mount directories
