@@ -121,7 +121,7 @@ command += [
 		   '-e', 'NB_GID=' + str(group_id),
 		   '-e', 'NB_GROUP=' + group_name,
 		   '-e', 'GPU=' + GPU,                         # set GPU
-		   '-w', os.getcwd(),                         
+		   '-w', home_dir,                         
 		   '-e', 'JUPYTER_ENABLE_LAB=yes',
 		   '-e', 'GRANT_SUDO=yes',
 		   '-e', 'CHOWN_HOME=yes',
