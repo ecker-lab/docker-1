@@ -19,6 +19,8 @@ Start container as above and run python script right after startup:
 GPU=0 dockerrun --env-file <path_to_env_file> <image_name> start.sh python3 my-script.py
 ```
 
+If you do not specify `JUPYTER_TOKEN` by setting it and passing the env file, the standard value `JUPYTER_TOKEN=please_set_individual_token` is set automatically.
+
 Show list of running containers and assigned GPU:
 ```bash
 dockerps
