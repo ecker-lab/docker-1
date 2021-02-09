@@ -103,6 +103,12 @@ if args.sshport:
 if args.jupyterport:
     command.extend(['-p', str(args.jupyterport) + ':8888'])  # set JUPYTER port
 
+
+if '--env-file' not in extras:
+    print('Setting standard value JUPYTER_TOKEN = please_set_individual_token')
+    command += ['-e', 'JUPYTER_TOKEN=please_set_individual_token']
+
+
 # mount directories
 command.extend(bind_dir)
 
@@ -115,7 +121,6 @@ command += [
 		   '-e', 'GPU=' + GPU,                         # set GPU
 		   '-w', home_dir,                         
 		   '-e', 'JUPYTER_ENABLE_LAB=yes',
-                   '-e', 'JUPYTER_TOKEN=token',
 		   '-e', 'GRANT_SUDO=yes',
 		   '-e', 'CHOWN_HOME=yes',
 		   '--name', container_name,                   # set container name
