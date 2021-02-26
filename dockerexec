@@ -1,9 +1,4 @@
 #!/bin/bash
 
-# Set primary group name
-GROUPNAME=ECKERLAB
-# Get according group id
-GROUPID=$(cut -d: -f3 < <(getent group $GROUPNAME))
-
-# Docker exec as current user with primary group as specified above
-docker exec -it --user `id -u`:$GROUPID $@
+# Docker exec as current user
+docker exec -it --user $USER -e HOME=/home/$USER $@

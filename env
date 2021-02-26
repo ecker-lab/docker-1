@@ -1,6 +1,6 @@
 # optionally set predefined jupyter token by uncommenting and adjusting the
 # token value
-# JUPYTER_TOKEN=dcb69506928946ffe4a60880e56aa6d79b6cd9ea9aaee168
+JUPYTER_TOKEN=please_set_individual_token
 
 
 # ---- datajoint config -----
