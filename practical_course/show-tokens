@@ -1,0 +1,22 @@
+#!/usr/bin/python3
+
+import subprocess
+import re
+
+res = subprocess.run(['docker', 'ps', '-aq'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+containers = res.stdout.decode('utf8').strip().split('\n')
+
+print('id\tport\tcontainer\ttoken')
+for i, c in enumerate(containers[::-1]): 
+    res = subprocess.run(['docker', 'logs', c], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    a = res.stderr.decode('utf8')
+
+    import re
+
+    for l in a.split('\n'):
+        m = re.match('^\[.*\] http://.*\?token=(.*)', l)
+        if m:
+            print(f'{i+1}\t{9999-i}\t{c}\t{m[1]}')
+
+
+

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+for i in epool01,2001,9999,0 epool02,2002,9998,1 epool03,2003,9997,2 epool04,2004,9996,3 epool05,2005,9995,4 epool06,2006,9994,5 epool07,2007,9993,6 epool08,2008,9992,7; do
+    IFS=","; set -- $i;
+    GPU=$4 /opt/eckerlab_docker/dockerrun2 practical_course_21 --jupyterport $3 --user $1 --uid $2
+done
