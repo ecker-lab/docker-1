@@ -67,6 +67,8 @@ parser.add_argument('--name', metavar='CONTAINER_NAME', type=str,
                     default="",
 					help='Name of container (default: $USER-[CPU/$GPU])')
 
+parser.add_argument('--local-datasets', default=False, action='store_true')
+
 (args, extras) = parser.parse_known_args()
 
 
@@ -87,6 +89,9 @@ else:
     home_dir = '/usr/users/'
     bind_dir = ['-v', home_dir + args.user + ':' + home_dir + args.user,
                 '-v', home_dir + 'agecker:' + home_dir + 'agecker']
+
+    if args.local_datasets:
+        bind_dir += ['-v', '/user/' + args.user + '/local_datasets' + ':/local_datasets']
 
 
 # container name
