@@ -1,4 +1,4 @@
-ARG BASE_CONTAINER=eckerlabdocker/docker-stacks:cuda11.0-cudnn8-python3.8
+ARG BASE_CONTAINER=eckerlabdocker/docker-stacks:ubuntu20.4-cuda11.3.0-cudnn8-python3.10.8
 FROM $BASE_CONTAINER
 
 LABEL maintainer="Max Burg <max.burg@bethgelab.org>"
@@ -43,7 +43,7 @@ RUN conda install \
 	scipy \
 	tensorboard \
 	tqdm \
- && conda clean -tipsy \
+ && conda clean -tipy \
  && fix-permissions $CONDA_DIR \
  && fix-permissions /home/$NB_USER
 
@@ -52,7 +52,7 @@ RUN pip install --no-cache-dir tensorflow-gpu \
  && fix-permissions /home/$NB_USER
 
 
-RUN pip install --no-cache-dir torch==1.7.1+cu110 torchvision==0.8.2+cu110 -f https://download.pytorch.org/whl/torch_stable.html \
+RUN pip install --no-cache-dir torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu113 \
  && fix-permissions $CONDA_DIR \
  && fix-permissions /home/$NB_USER
 
