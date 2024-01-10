@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 import os
 import grp
 import argparse
@@ -23,7 +23,7 @@ def check_other_containers(gpu):
         return()
     
     # get container ids and container names
-    a = check_output(['docker', 'ps']).split('\n')
+    a = check_output(['docker', 'ps'], text=True).split('\n')
     containerIds = []
     containerNames = []
     for l in a[1:]:
@@ -95,7 +95,7 @@ else:
 
 
 # container name
-gpu_name = '-gpu' + GPU.translate(None, ',') if GPU != "cpu" else '-cpu'
+gpu_name = '-gpu' + GPU.translate(str.maketrans('', '',  ',')) if GPU != "cpu" else '-cpu'
 container_name = os.environ['USER'] + gpu_name
 if args.name != "":
     container_name = container_name + "-" + args.name
