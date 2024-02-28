@@ -103,7 +103,7 @@ if os.environ.get('CONTAINER_POSTFIX'):
     container_name = container_name + "-" + os.environ['CONTAINER_POSTFIX']
 
 # put together the nvidia-docker command
-command = ['nvidia-docker', 'run', '-d']
+command = ['docker', 'run', '-d']
 
 if args.sshport:
     command.extend(['-p', str(args.sshport) + ':22'])  # set SSH port
